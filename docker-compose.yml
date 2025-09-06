@@ -1,0 +1,38 @@
+services:
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - ./backend:/app
+  #   environment:
+  #     FLASK_ENV: development
+  #   #   SUPABASE_URL: https://your-project.supabase.co
+  #   #   SUPABASE_KEY: your_supabase_service_key
+  #   networks:
+  #     - backend
+
+  pocketbase:
+    build: ./pocketbase
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./pocketbase/main.go:/app/main.go
+      - ./pocketbase/.air.toml:/app/.air.toml
+    networks:
+      - pocketbase
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - pocketbase
+    networks:
+      - pocketbase
+
+networks:
+  pocketbase:
+

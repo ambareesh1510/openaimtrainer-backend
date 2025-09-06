@@ -1,0 +1,4 @@
+[build]
+cmd = "go run . serve --http 0.0.0.0:5000"
+include_ext = ["go", "tpl", "mod"]
+exclude_dir = ["pb_data", "vendor"]
