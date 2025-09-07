@@ -258,6 +258,9 @@ func main() {
 			if err != nil {
 				return echo.NewHTTPError(http.StatusInternalServerError, "Failed to read info.toml")
 			}
+			if _, err := infoFile.Seek(0, io.SeekStart); err != nil {
+				panic(err)
+			}
 			var parsedInfoData InfoToml
 			_, err = toml.Decode(string(infoData), &parsedInfoData)
 			if err != nil {
