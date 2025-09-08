@@ -21,6 +21,7 @@ services:
       - ./pocketbase/.air.toml:/app/.air.toml
     networks:
       - pocketbase
+    image: ambareesh1510/aim-trainer-backend-pocketbase
 
   nginx:
     build: 
@@ -32,6 +33,7 @@ services:
       - pocketbase
     networks:
       - pocketbase
+    image: ambareesh1510/aim-trainer-backend-nginx
 
 networks:
   pocketbase:
