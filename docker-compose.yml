@@ -1,17 +1,4 @@
 services:
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "5000:5000"
-  #   volumes:
-  #     - ./backend:/app
-  #   environment:
-  #     FLASK_ENV: development
-  #   #   SUPABASE_URL: https://your-project.supabase.co
-  #   #   SUPABASE_KEY: your_supabase_service_key
-  #   networks:
-  #     - backend
-
   pocketbase:
     build: ./pocketbase
     ports:
@@ -29,13 +16,14 @@ services:
     volumes:
       - ./nginx/conf/:/etc/nginx/
       - ./nginx/html/:/usr/share/nginx/html/
+      - /etc/letsencrypt/:/etc/letsencrypt/:ro
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - pocketbase
     networks:
       - pocketbase
-    # image: ambareesh1510/aim-trainer-backend-nginx
 
 networks:
   pocketbase:
