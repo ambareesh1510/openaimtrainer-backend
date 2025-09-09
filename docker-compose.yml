@@ -24,16 +24,18 @@ services:
     image: ambareesh1510/aim-trainer-backend-pocketbase
 
   nginx:
-    build: 
-      context: ./nginx
-      dockerfile: Dockerfile
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./nginx/conf/:/etc/nginx/
+      - ./nginx/html/:/usr/share/nginx/html/
     ports:
       - "80:80"
     depends_on:
       - pocketbase
     networks:
       - pocketbase
-    image: ambareesh1510/aim-trainer-backend-nginx
+    # image: ambareesh1510/aim-trainer-backend-nginx
 
 networks:
   pocketbase:
