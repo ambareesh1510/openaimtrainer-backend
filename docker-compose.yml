@@ -1,6 +1,10 @@
 services:
   pocketbase:
-    build: ./pocketbase
+    build:
+      context: ./pocketbase
+      args:
+        ADMIN_EMAIL: ${OATS_ADMIN_EMAIL}
+        ADMIN_PASSWORD: ${OATS_ADMIN_PASSWORD}
     ports:
       - "5000:5000"
     volumes:
